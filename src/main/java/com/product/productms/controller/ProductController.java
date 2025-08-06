@@ -15,6 +15,7 @@ public class ProductController {
     public Mono<ServerResponse> createProduct(ServerRequest serverRequest) {
         Mono<Object> objectMono = serverRequest.bodyToMono(ProductDto.class).flatMap(productDto -> {
             System.out.println(productDto.getName());
+
             return productService.saveProduct(productDto);
         });
         return ServerResponse.ok().body(objectMono, ProductDto.class);
